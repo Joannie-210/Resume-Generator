@@ -543,7 +543,7 @@ useEffect(() => {
           </div>
           <div className="w-full rounded-lg pt-3 pb-2 h-auto flex flex-col justify-center items-center">
   {step === 5 && (
-    <div className="flex md:md-w-full w-full lg:w-200 m-auto bg-red-500 mt-20 justify-between gap-5 items-center">
+    <div className="flex md:md-w-full w-full lg:w-200 m-auto mt-20 justify-between gap-5 items-center">
       <Button className="cursor-pointer bg-purple-600 text-white" onClick={onPrev}>
         <FaArrowLeft size={14} />   Edit Resume
       </Button>
