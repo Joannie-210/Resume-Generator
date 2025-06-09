@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: white
+; /* purple-600 */
+  border-radius: 10px;
+}
+@font-face {
+  font-family: 'brico';
+  src: url('./assets/Bricolage_Grotesque/static/BricolageGrotesque-SemiBold.ttf')
+}
+@font-face {
+  font-family: 'cheva' ;
+  src: url('./assets/Cedarville_Cursive/CedarvilleCursive-Regular.ttf');
+}
+h1 {
+  font-family: 'brico';
+}
+h4 {
+  font-family: 'cheva';
+}
