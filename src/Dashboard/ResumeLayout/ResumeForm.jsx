@@ -547,7 +547,7 @@ useEffect(() => {
       <Button className="cursor-pointer bg-purple-600 text-white" onClick={onPrev}>
         <FaArrowLeft size={14} />   Edit Resume
       </Button>
-    <h1 className="text-2xl text-center font-semibold">Your Resume Preview</h1>
+    <h1 className="text-md md:text-lg lg:text-2xl text-center font-semibold">Your Resume Preview</h1>
     <div className="flex gap-2">
       
       <Button className="cursor-pointer bg-purple-600 text-white">
