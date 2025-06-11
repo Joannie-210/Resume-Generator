@@ -63,7 +63,7 @@ const Home = () => {
             <img src={Sad} alt="Without Resumate" className="w-full h-auto rounded-3xl object-cover shadow-lg" />
             <div className="bg-white text-gray-700 p-6 sm:p-8 mt-5 rounded-2xl w-full max-w-md shadow-lg">
               <h2 className="text-2xl font-semibold mb-4">You without <span className="text-purple-700">Resumate</span></h2>
-              {['Resumes don’t stand out', 'Too much grunt work', 'Can’t fine-tune to your taste', 'No amazing results'].map((item, idx) => (
+              {['Resumes don’t stand out', "They don't beat ATS", 'Can’t fine-tune to your taste', 'No amazing results'].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-2 text-lg mb-3">
                   <ThumbsDown size={22} className="text-gray-500" />
                   <span>{item}</span>
