@@ -1,175 +1,177 @@
-  import React, { useState, useEffect } from "react";
-  import { useForm, useFieldArray, useWatch } from "react-hook-form";
-  import * as yup from "yup";
-  import { yupResolver } from "@hookform/resolvers/yup";
-  import { useResume } from '../../context/ResumeContext'
-  import TemplateOne from '../Templates/TemplateOne';
-  import TemplateTwo from "../Templates/TemplateTwo";
-  import TemplateThree from "../Templates/TemplateThree";
-  import { Button } from "@/components/ui/button";
-  import { FaUserCircle } from "react-icons/fa";
-  import { FaArrowLeft } from "react-icons/fa";
-  import { FaArrowRight } from "react-icons/fa";
-  import Header from "@/components/custom/Header";
-  import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useResume } from '../../context/ResumeContext';
+import TemplateOne from '../Templates/TemplateOne';
+import TemplateTwo from "../Templates/TemplateTwo";
+import TemplateThree from "../Templates/TemplateThree";
+import { Button } from "@/components/ui/button";
+import { FaUserCircle, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import Header from "@/components/custom/Header";
+import { useNavigate } from "react-router-dom";
 
-
-
-  const StepOneSchema = yup.object().shape({
-    fullName: yup.string().required("Full name is required"),
-    email: yup.string().email("Invalid email format").required("Email is required"),
-    address: yup.string().required("Address is required"),
-    phone: yup.string().matches(/^\d{10,}$/, "Phone number must be at least 10 digits"),
-    linkedin: yup.string().required("Please fill in your job title"),
-    summary: yup.string().required("Please fill in your summary")
+// Validation schema for step 1: personal information
+const StepOneSchema = yup.object().shape({
+  fullName: yup.string().required("Full name is required"),
+  email: yup.string().email("Invalid email format").required("Email is required"),
+  address: yup.string().required("Address is required"),
+  phone: yup.string().matches(/^\d{10,}$/, "Phone number must be at least 10 digits"),
+  linkedin: yup.string().required("Please fill in your job title"),
+  summary: yup.string().required("Please fill in your summary")
     .max(100, "Summary can't exceed 300 characters"),
+});
+
+// Validation schema for step 2: work experience
+const StepTwoSchema = yup.object().shape({
+  experiences: yup.array()
+    .of(yup.object().shape({
+      companyName: yup.string().required("Must include your company name"),
+      startDate: yup.date().required("Start date is required"),
+      endDate: yup.date()
+        .required("End date is required")
+        .min(yup.ref("startDate"), "End date must be after start date"),
+      roles: yup.string().required("Please fill in your roles"),
+    }))
+    .max(3, "You can only add up to 3 work experiences"),
+});
+
+// Validation schema for step 3: skills
+const StepThreeSchema = yup.object().shape({
+  skills: yup.array()
+    .of(yup.string().required("Skill is required"))
+    .max(10, "You can only add up to 10 skills"),
+});
+
+// Validation schema for step 4: certifications
+const StepFourSchema = yup.object().shape({
+  certifications: yup.array()
+    .of(yup.object().shape({
+      name: yup.string().required("Certification name is required"),
+      startYear: yup.date().required("Start date is required"),
+      endYear: yup.date().required("End date is required"),
+      issuer: yup.string().required("Issuer is required"),
+    }))
+    .max(3, "You can only add up to 3 certifications"),
+});
+
+const ResumeForm = () => {
+  const navigate = useNavigate();
+  const { template, setTemplate, setFormData } = useResume();
+
+  // Step control and UI state
+  const [step, setStep] = useState(1);
+  const [profileImage, setProfileImage] = useState(null);
+  const [suggestions, setSuggestions] = useState([]);
+  const [colorPalette, setColorPalette] = useState("default");
+
+  // Warn user before closing tab (e.g. unsaved changes)
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = ''; // Required for Chrome
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, []);
+
+  // Determine which schema to use based on current step
+  const validateSchema = step === 1 ? StepOneSchema
+    : step === 2 ? StepTwoSchema
+    : step === 3 ? StepThreeSchema
+    : StepFourSchema;
+
+  // Initialize form with validation and default values
+  const { register, handleSubmit, control, watch, formState: { errors }, setValue, getValues } = useForm({
+    resolver: yupResolver(validateSchema),
+    defaultValues: {
+      experiences: [{ companyName: "", startDate: "", endDate: "", roles: "" }],
+      certifications: [{ name: "", date: "", issuer: "" }],
+      skills: [""],
+    },
   });
 
-  const StepTwoSchema = yup.object().shape({
-    experiences: yup.array()
-      .of(yup.object().shape({
-        companyName: yup.string().required("Must include your company name"),
-        startDate: yup.date().required("Start date is required"),
-        endDate: yup.date()
-          .required("End date is required")
-          .min(yup.ref("startDate"), "End date must be after start date"),
-        roles: yup.string().required("Please fill in your roles"),
-      }))
-      .max(3, "You can only add up to 3 work experiences"),
-  });
-
-
-  const StepThreeSchema = yup.object().shape({
-    skills: yup.array()
-      .of(yup.string().required("Skill is required"))
-      .max(10, "You can only add up to 10 skills"),
-  });
-
-
-  const StepFourSchema = yup.object().shape({
-    certifications: yup.array()
-      .of(yup.object().shape({
-        name: yup.string().required("Certification name is required"),
-        startYear: yup.date().required("Start date is required"),
-        endYear: yup.date().required("End date is required"),
-        issuer: yup.string().required("Issuer is required"),
-      }))
-      .max(3, "You can only add up to 3 certifications"),
-  });
-
-  const ResumeForm = () => {
-    const navigate = useNavigate();
-    const { template, setTemplate, setFormData } = useResume();
-    const [step, setStep] = useState(1);
-    const [profileImage, setProfileImage] = useState(null);
-    const [suggestions, setSuggestions] = useState([]);
-    const [colorPalette, setColorPalette] = useState("default");
-    
-    
-useEffect(() => {
-  const handleBeforeUnload = (e) => {
-    e.preventDefault();
-    e.returnValue = ''; // Required for Chrome
+  // Handle final submission after last step
+  const onFinalSubmit = (data) => {
+    setFormData(data);
+    navigate("/dashboard/resume-page");
   };
 
-  window.addEventListener('beforeunload', handleBeforeUnload);
-  return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-}, []);
+  // Manage dynamic fields
+  const { fields, append, remove } = useFieldArray({ control, name: "experiences" });
+  const { fields: skillFields, append: appendSkill, remove: removeSkill } = useFieldArray({ control, name: "skills" });
+  const { fields: certFields, append: appendCert, remove: removeCert } = useFieldArray({ control, name: "certifications" });
 
-
-    const validateSchema = step === 1 ? StepOneSchema : step === 2 ? StepTwoSchema : step === 3 ? StepThreeSchema : StepFourSchema;
-    const { register, handleSubmit, control, watch, formState: { errors }, setValue, getValues } = useForm({
-      resolver: yupResolver(validateSchema),
-      defaultValues: {
-        experiences: [{ companyName: "", startDate: "", endDate: "", roles: "" }],
-        certifications: [{ name: "", date: "", issuer: "" }],
-        skills: [""],
-      },
-    });
-
-    const onFinalSubmit = (data) => {
-    setFormData(data); // Save data in context
-    navigate("/dashboard/resume-page"); // Navigate to resume page
+  // Skill suggestions (autocomplete logic)
+  const handleInputChange = (e) => {
+    const input = e.target.value;
+    if (input) {
+      const filteredSkills = skills.filter(skill => skill.toLowerCase().includes(input.toLowerCase()));
+      setSuggestions(filteredSkills);
+    } else {
+      setSuggestions([]);
+    }
   };
 
-    const { fields, append, remove } = useFieldArray({
-      control,
-      name: "experiences",
-    });
+  const handleSuggestionClick = (skill) => {
+    const currentSkills = getValues("skills");
+    const skillIndex = currentSkills.findIndex((s) => s === "");
 
-    const { fields: skillFields, append: appendSkill, remove: removeSkill } = useFieldArray({
-      control,
-      name: "skills",
-    });
+    if (skillIndex >= 0) {
+      setValue(`skills.${skillIndex}`, skill);
+    }
 
-    const {fields: certFields, append: appendCert, remove: removeCert} = useFieldArray({
-      control,
-      name: "certifications",
-    });
+    setSuggestions([]);
+  };
 
-    const handleInputChange = (e) => {
-      const input = e.target.value;
-      if (input) {
-        const filteredSkills = skills.filter(skill => skill.toLowerCase().includes(input.toLowerCase()));
-        setSuggestions(filteredSkills);
-      } else {
-        setSuggestions([]);
-      }
-    };
-    
-    const handleSuggestionClick = (skill) => {
-      const currentSkills = getValues("skills");
-      const skillIndex = currentSkills.findIndex((s) => s === "");
-    
-      if (skillIndex >= 0) {
-        setValue(`skills.${skillIndex}`, skill);  
-      }
-    
-      setSuggestions([]);  
-    };
-    
+  // Load template from localStorage on mount
+  useEffect(() => {
+    const storedTemplate = localStorage.getItem("selectedTemplate");
+    if (storedTemplate) {
+      setTemplate(storedTemplate);
+    }
+  }, [setTemplate]);
 
-    useEffect(() => {
-      const storedTemplate = localStorage.getItem("selectedTemplate");
-      if (storedTemplate) {
-        setTemplate(storedTemplate);
-      }
-    }, [setTemplate]);
+  const formValues = watch(); // Watch form values in real-time
 
-    const formValues = watch();
+  // Save form data temporarily
+  const onSubmit = (data) => {
+    console.log("Form Data:", data);
+    setFormData(data);
+  };
 
-    const onSubmit = (data) => {
-      console.log("Form Data:", data);
-      setFormData(data);
-    };
+  // Move to next step
+  const onNext = (data) => {
+    setFormData((prev) => ({ ...prev, ...data }));
+    setStep((prev) => prev + 1);
+  };
 
-    const onNext = (data) => {
-      setFormData((prev) => ({ ...prev, ...data }));
-      setStep((prev) => prev + 1);
-    };
+  // Go to previous step
+  const onPrev = () => {
+    setStep((prev) => prev - 1);
+  };
 
-    const onPrev = () => {
-      setStep((prev) => prev - 1);
-    };
+  // Mapping template names to components
+  const TemplateComponents = {
+    TemplateOne,
+    TemplateTwo,
+    TemplateThree
+  };
+  const SelectedTemplate = TemplateComponents[template]; // Chosen template component
 
-    const TemplateComponents = {
-      TemplateOne,
-      TemplateTwo,
-      TemplateThree
-    };
+  // Convert uploaded profile image to base64
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-    const SelectedTemplate = TemplateComponents[template];
-
-    const handleImageUpload = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setProfileImage(reader.result); 
-        };
-        reader.readAsDataURL(file);
-      }
-    };
+  // Add new skill input field
   const handleAddSkill = () => {
     if (getValues("skills").length < 12) {
       appendSkill("");
@@ -177,7 +179,8 @@ useEffect(() => {
       alert("You can only add up to 12 skills.");
     }
   };
-    
+
+  
 
     return (
       <>
