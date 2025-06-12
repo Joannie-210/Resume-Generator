@@ -12,7 +12,7 @@ const TemplateTwo= ({ data }) => {
   const handleDownloadPDF = () => {
     const input = resumeRef.current;
     
-    html2canvas(input, { scale: 5, useCORS: true }).then((canvas) => {
+    html2canvas(input, { scale: 4, useCORS: true }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png"); 
       const pdf = new jsPDF("p", "mm", "a4");
       const imgWidth = 100; 
