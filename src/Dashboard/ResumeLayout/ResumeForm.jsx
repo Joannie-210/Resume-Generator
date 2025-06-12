@@ -19,7 +19,7 @@ const StepOneSchema = yup.object().shape({
   phone: yup.string().matches(/^\d{10,}$/, "Phone number must be at least 10 digits"),
   linkedin: yup.string().required("Please fill in your job title"),
   summary: yup.string().required("Please fill in your summary")
-    .max(100, "Summary can't exceed 300 characters"),
+    .max(600, "Summary can't exceed 600 characters"),
 });
 
 // Validation schema for step 2: work experience
