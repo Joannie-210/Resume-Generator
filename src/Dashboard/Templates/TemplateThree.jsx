@@ -113,7 +113,7 @@ const TemplateOne = ({ data }) => {
 
       <button 
         onClick={handleDownloadPDF} 
-        className="flex items-center justify-between w-40 mt-4 bg-purple-600 text-white p-3 rounded-lg hover:bg-purple-500 transition"
+        className="flex items-center justify-between w-40 mt-4 bg-purple-600 text-white p-3 rounded-lg hover:bg-blue-700 transition"
       >
         Download PDF<AiOutlineDownload className="mr-2" />
       </button>
