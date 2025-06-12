@@ -15,7 +15,7 @@ const TemplateTwo= ({ data }) => {
     html2canvas(input, { scale: 3, useCORS: true }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png"); 
       const pdf = new jsPDF("p", "mm", "a4");
-      const imgWidth = 210; 
+      const imgWidth = 100; 
       const pageHeight = 267; 
       const imgHeight = (canvas.height * imgWidth) / canvas.width; 
 
@@ -46,7 +46,7 @@ const TemplateTwo= ({ data }) => {
             <div className="border-b-2 w-full pb-3">
                <h1 className="text-left  text-2xl break-words  mb-10 font-bold">{data.fullName || 'Your Name'}</h1>
              
-              <div className="w-full mb-5">
+              <div className="w-full mb-2">
               <p className="text-[14px] font-bold">About me</p>
               <p className="text-[11px] break-words w-full">
                 {data.summary || "Your summary goes here..."}
