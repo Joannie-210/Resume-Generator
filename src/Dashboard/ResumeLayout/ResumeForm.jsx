@@ -321,7 +321,7 @@ const ResumeForm = () => {
                   <label htmlFor="summary">Write a brief summary about your role</label>
                 <textarea
     rows="3"
-    maxLength={300}
+    maxLength={800}
     {...register("summary")}
     className="w-full border-2 border-gray-300 p-2 rounded-lg"
   />
