@@ -9,32 +9,34 @@ const TemplateOne = ({ data }) => {
 
   const resumeRef = useRef(); 
 
-  const handleDownloadPDF = () => {
-    const input = resumeRef.current;
-    
+ const handleDownloadPDF = () => {
+  const input = resumeRef.current;
+  setTimeout(() => {
     html2canvas(input, { scale: 3, useCORS: true }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png"); 
+      const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
-      const imgWidth = 210; 
-      const pageHeight = 267; 
-      const imgHeight = (canvas.height * imgWidth) / canvas.width; 
+      const imgWidth = 210;
+      const pageHeight = 297;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
       let heightLeft = imgHeight;
       let position = 0;
 
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight, "", "FAST");
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
 
       heightLeft -= pageHeight;
       while (heightLeft > 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight, "", "FAST");
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
 
       pdf.save("My_Resume.pdf");
     });
-  };
+  }, 300); // Add small delay to ensure styles are applied
+};
+
 
   return (
     <div className="w-full h-full flex flex-col  items-center">
