@@ -59,7 +59,12 @@ const TemplateOne = ({ data }) => {
               <p className="text-[12px] break-words text-white"><span className='font-bold'>Job Title:</span> {data.linkedin || "N/A"}</p>
             </div>
 
-           
+            <div className="w-full text-white">
+              <p className="text-[14px] font-bold">Skills</p> 
+              <ul className="list-disc text-white pl-4 text-[11px]">
+                {data.skills && data.skills.length > 0 ? data.skills.map((skill, index) => <li key={index}>{skill}</li>) : <li>No skills added</li>}
+              </ul>
+            </div>
 
           </div>
 
@@ -98,12 +103,7 @@ const TemplateOne = ({ data }) => {
             </div>
 
           
-             <div className="w-full text-black">
-              <p className="text-[14px] font-bold">Skills</p> 
-              <ul className="list-disc pl-4 text-[11px]">
-                {data.skills && data.skills.length > 0 ? data.skills.map((skill, index) => <li key={index}>{skill}</li>) : <li>No skills added</li>}
-              </ul>
-            </div>
+            
           </div>
           
         </div>
