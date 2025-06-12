@@ -8,10 +8,9 @@ import TemplateThree from '../../assets/Template3.jpeg';
 import Header from '../../components/custom/Header';
 
 const templates = [
-  { id: 1, name: 'Modern', component: 'TemplateOne', image: TemplateOne  },
+  { id: 1, name: 'Modern', component: 'TemplateOne', image: TemplateOne },
   { id: 2, name: 'Classic', component: 'TemplateTwo', image: TemplateTwo },
   { id: 3, name: 'Creative', component: 'TemplateThree', image: TemplateThree },
- 
 ];
 
 const SelectTemplate = () => {
@@ -26,25 +25,32 @@ const SelectTemplate = () => {
 
   return (
     <>
-    <Header />
-   
-    <div className="p-6 flex flex-col bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 items-center px-4 py-8">
-      <h1 className="text-4xl font-bold mt-25 mb-3">Choose Your <span className='text-purple-600'>Resume</span> Template</h1>
-      <p className="text-lg text-gray-700 mb-10">Get your resume up and reasy with our beautiful templates.</p>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-15">
-        {templates.map((template) => (
-          <div
-            key={template.id}
-            className="w-80 shadow-md cursor-pointer hover:opacity-70 hover:scale-105 transition"
-            onClick={() => handleSelect(template)}
-          >
-            <img src={template.image} alt={template.name} className="w-full h-100 object-contain" />
-           
-          </div>
-        ))}
+      <Header />
+      <div className="min-h-screen px-4 py-10 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex flex-col items-center">
+        <h1 className="text-xl mt-30 sm:mt-25 lg:mt-20 sm:text-3xl md:text-4xl font-bold text-center mb-2">
+          Choose Your <span className="text-purple-600">Resume</span> Template
+        </h1>
+        <p className="text-md sm:text-lg text-gray-700 text-center mb-10">
+          Get your resume up and ready with our beautiful templates.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+          {templates.map((template) => (
+            <div
+              key={template.id}
+              className="cursor-pointer object-cover bg-white rounded-lg shadow-md hover:scale-105 transition transform duration-300"
+              onClick={() => handleSelect(template)}
+            >
+              <img
+                src={template.image}
+                alt={template.name}
+                className="w-full aspect-video object-contain rounded-t-lg"
+              />
+              <div className="p-4 text-center font-semibold">{template.name}</div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-     </>
+    </>
   );
 };
 
