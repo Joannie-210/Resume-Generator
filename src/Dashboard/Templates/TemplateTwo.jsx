@@ -5,7 +5,7 @@ import { AiOutlineDownload } from 'react-icons/ai';
 
 
 const TemplateTwo= ({ data }) => {
-  console.log("TemplateOne received data:", data);
+  console.log("TemplateTwo received data:", data);
 
   const resumeRef = useRef(); 
 
