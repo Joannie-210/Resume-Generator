@@ -38,7 +38,7 @@ const TemplateTwo= ({ data }) => {
 
   return (
     <div className="w-full h-full flex flex-col  items-center">
-     <div ref={resumeRef} className="relative w-full md:w-130 lg:w-100 shadow-lg m-auto min-h-120 max-h-auto mt-10 flex flex-col">
+     <div ref={resumeRef} className="relative w-full md:w-130 lg:w-120 shadow-lg m-auto min-h-120 max-h-auto mt-10 flex flex-col">
   <div className="absolute top-0 left-0 rounded-bl-[30rem] bg-[#f5f0e3] w-full h-25 z-[-1]"></div>
 
         <div className="flex w-full">
@@ -112,10 +112,9 @@ const TemplateTwo= ({ data }) => {
           </div>
         </div>
       </div>
-
-      <button 
+  <button 
         onClick={handleDownloadPDF} 
-        className="flex  items-center justify-between w-40 mt-4 bg-purple-600 text-white p-3 rounded-lg hover:bg-blue-500 transition"
+        className="flex items-center justify-between w-40 mt-4 bg-purple-600 text-white p-3 rounded-lg hover:bg-purple-500 cursor-pointer transition"
       >
         Download PDF<AiOutlineDownload className="mr-2" />
       </button>
