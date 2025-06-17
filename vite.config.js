@@ -10,6 +10,9 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+ server: {
+    historyApiFallback: true, // necessary for routing fallback
+  },
   },
 })
 
