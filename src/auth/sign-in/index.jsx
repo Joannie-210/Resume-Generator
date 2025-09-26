@@ -1,14 +1,11 @@
-import React from 'react'
-import { Button } from  '@/components/ui/button'
-import { Link } from 'react-router-dom'
-import { SignIn} from '@clerk/clerk-react'
+import React from "react";
+import { SignIn } from "@clerk/clerk-react";
 
-const SignInPage = () => {
+export default function SignInPage() {
   return (
-    <div className='flex p-3 px-4 shadow-md items-center justify-center h-screen'>
-      <SignIn/>
+    <div className="flex p-3 px-4 shadow-md items-center justify-center h-screen">
+      {/* 👇 After login, redirect to dashboard */}
+      <SignIn afterSignInUrl="/dashboard" />
     </div>
-  )
+  );
 }
-
-export default SignInPage
