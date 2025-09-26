@@ -29,7 +29,7 @@ const Dashboard = () => {
     <Header />
    
     <div className="p-6 flex flex-col bg-white  items-center px-4 py-8">
-      <h1 className="text-4xl font-bold mt-25 mb-3">Choose Your <span className='text-purple-600'>Resume</span> Template</h1>
+      <h1 className="text-3xl sm:text-4xl text-center font-bold mt-25 mb-3">Choose Your <span className='text-purple-600'>Resume</span> Template</h1>
       <p className="text-lg text-gray-700 mb-10">Get your resume up and reasy with our beautiful templates.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-15">
         {templates.map((template) => (

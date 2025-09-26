@@ -185,7 +185,7 @@ const ResumeForm = () => {
       <Header/>
       <div className="scrollbar-thin scrollbar-thumb-purple-600 scrollbar-track-transparent overflow-x-hidden bg-center bg-cover w-full h-full min-h-screen  flex flex-col items-center justify-center">
       
-        <div className="flex-col sm-w-80 md:w-150 md:min-w-130  lg:min-w-170  lg:w-280 xl:w-300 xl:max-w-400 md:max-w-500 space-y-6 sm:flex-col md:flex-col lg:flex-row m-auto  flex items-center justify-evenly">
+        <div className="flex-col sm-w-80 md:w-150 md:min-w-130 gap-20  lg:min-w-170  lg:w-280 xl:w-300 xl:max-w-400 md:max-w-500 space-y-6 sm:flex-col md:flex-col lg:flex-row m-auto  flex items-center justify-evenly">
           <div className="w-fit mt-1 mb-1 h-auto">
           <div className="flex mt-15 mb-10 justify-center items-center">
         

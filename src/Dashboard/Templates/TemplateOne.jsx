@@ -16,7 +16,7 @@ const TemplateThree = ({ data }) => {
       const imgData = canvas.toDataURL("image/png"); 
       const pdf = new jsPDF("p", "mm", "a4");
       const imgWidth = 210; 
-      const pageHeight = 267; 
+      const pageHeight = 310; 
       const imgHeight = (canvas.height * imgWidth) / canvas.width; 
 
       let heightLeft = imgHeight;
