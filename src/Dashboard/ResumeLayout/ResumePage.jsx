@@ -1,7 +1,7 @@
 import React from "react";
 import { useResume } from "../../context/ResumeContext";
 import TemplateOne from "../Templates/TemplateOne";
-import TemplateTwo from "../Templates/TemplateTwo";
+// import TemplateTwo from "../Templates/TemplateTwo";
 import TemplateThree from "../Templates/TemplateThree";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -12,13 +12,13 @@ const ResumePage = () => {
 
   if (!formData) {
     // If no form data, redirect back to form or template selection
-    navigate("/dashboard/select-template");
+    navigate("/dashboard");
     return null;
   }
 
   const TemplateComponents = [
     TemplateOne,
-    TemplateTwo,
+    // TemplateTwo,
     TemplateThree,
   ];
 

@@ -8,7 +8,7 @@ import Header from '../../components/custom/Header';
 
 const templates = [
   { id: 1, name: 'Modern', component: 'TemplateOne', image: TemplateOne },
-  { id: 3, name: 'Creative', component: 'TemplateThree', image: TemplateThree },
+  { id: 2, name: 'Creative', component: 'TemplateThree', image: TemplateThree },
 ];
 
 const SelectTemplate = () => {
@@ -31,7 +31,7 @@ const SelectTemplate = () => {
         <p className="text-md sm:text-lg text-gray-700 text-center mb-10">
           Get your resume up and ready with our beautiful templates.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full max-w-6xl">
           {templates.map((template) => (
             <div
               key={template.id}

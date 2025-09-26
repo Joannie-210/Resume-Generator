@@ -1,17 +1,16 @@
-import { UserButton } from '@clerk/clerk-react'
+
 import React from 'react'
 import Header from '../components/custom/Header'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { FaRegCheckCircle, FaUserPlus, FaFileAlt, FaEdit, FaDownload } from 'react-icons/fa'
 import { ThumbsDown, ThumbsUp } from 'lucide-react'
-import { useUser } from '@clerk/clerk-react'
 import Sad from '../assets/sad.webp'
 import Oprah from '../assets/oprah.gif'
 
 
 const Home = () => {
-  const { user, isSignedIn } = useUser()
+ 
 
   const FeatureItem = ({ text }) => (
     <span className="flex items-center gap-2 px-3 py-2 bg-white rounded-md shadow-sm">
@@ -31,16 +30,16 @@ const Home = () => {
     <>
       <Header />
 
-      {/* Hero Section */}
+     
       <div className="w-full h-170 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 px-4 sm:px-6 py-16 text-center rounded-xl shadow-md">
-        <h1 className="mt-25 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-black mb-6 max-w-5xl mx-auto leading-tight">
+        <h1 className="mt-25 text-[30px] sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-black mb-6 max-w-5xl mx-auto leading-tight">
           Create clean <span className="text-purple-600">resumes</span> in a minute!
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-6 max-w-3xl mx-auto">
           Expert-crafted resumes designed to impress recruiters and beat ATS. <span className="font-medium text-gray-800">Stand out. Get noticed. Land your dream job.</span>
         </p>
         <div className="mt-4">
-          <Link to={isSignedIn ? '/dashboard' : '/auth/sign-in'}>
+          <Link to='/dashboard'>
             <Button variant="secondary" size="lg" className="rounded-lg">
               Start Building
             </Button>
@@ -53,12 +52,12 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Why Choose Us Section */}
+      
       <div className="bg-gradient-to-b from-purple-400 to-purple-900 py-16 px-4 rounded-bl-[10rem] text-white">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-12">Why Choose Us?</h1>
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
 
-          {/* Card 1 */}
+          
           <div className="flex flex-col items-center">
             <img src={Sad} alt="Without Resumate" className="w-full h-auto rounded-3xl object-cover shadow-lg" />
             <div className="bg-white text-gray-700 p-6 sm:p-8 mt-5 rounded-2xl w-full max-w-md shadow-lg">
@@ -72,7 +71,7 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Card 2 */}
+          
           <div className="flex flex-col items-center">
             <img src={Oprah} alt="With Resumate" className="w-full h-auto rounded-3xl object-cover shadow-lg" />
             <div className="bg-white text-gray-800 p-6 sm:p-8 mt-5 rounded-2xl w-full max-w-md shadow-lg">
@@ -119,7 +118,7 @@ const Home = () => {
 </video>
       </section>
 
-      {/* Testimonials */}
+    
     <div className="bg-gradient-to-br h-auto py-16 flex flex-col justify-center from-purple-100 to-blue-100 py-16 px-4">
   <h1 className="text-4xl md:text-5xl font-bold text-black text-center mb-12">
     What Our Users Say
@@ -191,7 +190,7 @@ const Home = () => {
           <p className="text-lg md:text-xl text-gray-300 mb-8">
             Join thousands of users who have transformed their job search with Resumate. Whether you're a fresh graduate or a seasoned pro, we've got your back.
           </p>
-          <Link to={isSignedIn ? '/dashboard' : '/auth/sign-in'}>
+          <Link to='/dashboard'>
             <Button variant="destructive" size="lg" className="rounded-lg">
               Start Building 
             </Button>

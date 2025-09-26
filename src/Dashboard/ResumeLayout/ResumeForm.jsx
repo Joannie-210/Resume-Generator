@@ -195,7 +195,7 @@ const ResumeForm = () => {
           </div>
           {step === 1 && (
           <div className="pl-5 flex w-full m-auto mt-5 h-auto justify-start  gap-5 items-center ">
-            <Button className='cursor-pointer bg-purple-600 text-white' onClick= {()=>navigate('/dashboard/select-template')}><FaArrowLeft size={4} />Templates</Button>
+            <Button className='cursor-pointer bg-purple-600 text-white' onClick= {()=>navigate('/dashboard')}><FaArrowLeft size={4} />Templates</Button>
           
           </div>
 

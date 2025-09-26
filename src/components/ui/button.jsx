@@ -14,7 +14,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-lg text-purple-600 shadow-xs border-2 border-burple-600 bg-white py-7 cursor-pointer px-12 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
-          "border-2 border-white text-black cursor-pointer border-gray-300 bg-white  hover:bg-white shadow-[0_0_5px_rgba(0,0,0,0.1)] hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "py-10 text-white cursor-pointer  bg-gradient-to-b from-purple-700 via-purple-400 to-purple-700  hover:bg-white shadow-[0_0_5px_rgba(0,0,0,0.1)] hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary:
           " transition transform active:scale-90 bg-gradient-to-b drop-shadow-lg drop-shadow-[0_3px_9px_rgba(88,28,135,0.2)] shadow-xl border rounded-lg hover:bg-gradient-br hover:to-purple-500 from-purple-300 to-purple-700 py-7 px-5 w-50 h-140 text-white text-lg shadow-xs hover:bg-secondary/80",
         ghost:
